@@ -1,0 +1,95 @@
+
+<html>
+    <head>
+        <meta name="viewport" content="width=device-width, shrink-to-fit=YES">
+        <style>
+
+            :root {
+              --text-color: black;
+              --border-color: rgb(203, 204, 208);
+            }
+        
+            @media screen and (prefers-color-scheme: dark) {
+              :root {
+                --text-color: white;
+                --border-color: rgb(43, 43, 43);
+              }
+            }
+            
+            body {
+                position: relative;
+                color: var(--text-color);
+                font: -apple-system-body;
+                font-size: 26pt;
+                line-height: 33pt;
+                word-spacing: 3pt;
+            }
+            
+            h1 {
+                text-align: center;
+                font: -apple-system-headline;
+                font-size: 32pt;
+                line-height: 32pt;
+                padding: 0;
+                margin: 0 0 32px 0;
+            }
+            
+            p {
+                text-indent: 64px;
+                padding: 0;
+                margin: 0;
+            }
+        
+            section {
+                margin: 32px;
+                padding: 32px;
+                border: 2px var(--border-color) solid;
+            }
+            
+        </style>
+    </head>
+    <body>
+        <section>
+            <p>
+                The TiltType Keyboard is an experiment in touch-based text input, UX design, and a fairly low priority weekend project.
+            </p>
+            <br>
+            <p>
+                It features two joystick-style keypads, each with 3 separate surrounding buttons, with each pad containing 2 rings of 8 keys (or 32 in all).  As a keyboard, it supports four modes: Normal, Shift, Alt, and Shift+Alt, for a total of 152 possible key assignments.  Actions are performed on the surrounding buttons by tapping, double-tapping (if it supports toggling), or holding it down (if it supports auto-repeat).  Actions are performed on a keypad by draging to move (or touching directly) and release to trigger, the action for a corresponding key.  These actions may result in typing one or more characters, or triggering some behavior, such as switching between input modes.
+            </p>
+            <br>
+            <p>
+                As you touch and drag along its surface a joystick's handle follows your finger and the entire joystick tilts 3-dimensionally to provide additional visual registration.  While typing or dragging, a desription of the current key selection is presented in the upper inside corner of each joystick, while Haptic feedback is provided to inform the user of a triggered action or change in selection.
+            </p>
+            <br>
+            <p>
+                The keyboard includes two pre-defined layouts: one based on the standard QWERTY layout, and a custom layout called TILTY.  In addition to those, it also has support for fully custom side-loaded layouts, specified in either json or plist format.  (See: "Tour" / "Custom Layouts" for more)
+            </p>
+            <br>
+            <p>
+                It also comes bundled with an iOS app (which you are likely using right now) that provides a test implementation of the keyboard to be re-positioned and played with, a scratch pad to test it out, a little game to practice, and a variety of settings to alter its appearance and behavior.  It is through this app's settings that you can switch between keyboard layouts, configure key label appearance, effects, haptics, and more.
+            </p>
+        </section>
+        <section>
+            <h1>History</h1>
+            <p>
+                Initially, Tilt Type was just a quick prototype, with a curious goal of adapting a keyboard to each thumb, rather than the other way around (which is how we still do it today), just to see how it feels.  I first toyed with the idea of joystick-based input because their use in game controllers has been widespread for so long, and I could see value in applying such a thing to VR/AR systems as well.
+            </p>
+            <br>
+            <p>
+                I started mocking up appearances, and immediately had to think of new layouts that best accomodated them.  By that point it was already pretty close to its current appearance overall, as well as much of its functionality.  With the advent of third party keyboard support in iOS, I decided to rewrite it, as prototype code is not typically the most maintainable.  I was a little dissapointed to find that, unlike Apple's own keyboard (which is capable of splitting and repositioning), third party keyboards were confined to a fixed, filled rectangle.  That put me off finishing it for a couple of years, as I felt it wouldn't allow me to truly do it justice.
+            </p>
+            <br>
+            <p>
+                Early this year (2020) I developed renewed interest when thinking about Haptic Feedback, which I had just worked with quite a bit recently, and how it might impact a users' experience.  It seemed like it had the potential to greatly increase accuracy, and to even allow for some amount of eyes-free use.  I liked how it felt, and decided to put a little time into finishing it enough for release so others can play around with it, too.  And so, here it is!
+            </p>
+        </section>
+        <section>
+            <h1>Future Plans</h1>
+            <p>
+                There are some cool things that can certainly be done with this, but beyond a slight tweak here and there, I expect this will remain very low (or no) priority for some time.  I could see some real potential in implementing a swipe-based input method, for example, but that would require a significant time investment which would really need to be worth it just to start.  I'm also considering open sourcing this at some point, but I'm not really sure that's needed just yet.  We'll just have to see what happens.
+            </p>
+        </section>
+
+    </body>
+</html>

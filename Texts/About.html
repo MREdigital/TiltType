@@ -1,0 +1,68 @@
+
+<html>
+    <head>
+        <meta name="viewport" content="width=device-width, shrink-to-fit=YES">
+        <style>
+
+            :root {
+              --text-color: black;
+              --image-filter: none;
+              --border-color: rgb(203, 204, 208);
+            }
+        
+            @media screen and (prefers-color-scheme: dark) {
+              :root {
+                --text-color: white;
+                --image-filter: invert();
+                --border-color: rgb(43, 43, 43);
+              }
+            }
+            
+            body {
+                position: relative;
+                color: var(--text-color);
+                font: -apple-system-body;
+                font-size: 26pt;
+                line-height: 33pt;
+                word-spacing: 3pt;
+            }
+            
+            p {
+                text-indent: 0px;
+                text-align: center;
+                padding: 0;
+                margin: 0;
+            }
+        
+            img {
+                filter: var(--image-filter);
+            }
+        
+            section {
+                margin: 32px;
+                padding: 32px;
+                border: 2px var(--border-color) solid;
+            }
+            
+        </style>
+    </head>
+    <body>
+        <img src="Sketch.png" style="width: 100%"></img>
+        <section>
+            <p>
+                The TiltType Keyboard is an experiment in touch-based text input, UX design, and a low priority weekend project of mine.  It wasn't intended to replace our day-to-day keyboards, as it is not much more than a polished proof-of-concept, but I do think it shows real promise.  It's something that was fun to build, is still fun to play with, and which I hope can in some ways contribute to or influence other such experiments in the future.
+            </p>
+            <br>
+            <p>
+                Thank you for trying it out, and I hope you enjoy!
+            </p>
+        </section>
+        <section>
+            <p>
+                TiltType, TILTY, and TiltType Keyboard,<br>
+                Copyright © 2020, Eric Reedy.<br>
+                All rights reserved.<br>
+            </p>
+        </section>
+    </body>
+</html>

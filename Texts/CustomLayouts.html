@@ -1,0 +1,260 @@
+
+<html>
+    <head>
+        <meta name="viewport" content="width=device-width, shrink-to-fit=YES">
+        <style>
+
+            :root {
+              --text-color: black;
+              --border-color: rgb(203, 204, 208);
+              --background-color: rgba(0,0,0,0.05);
+            }
+        
+            @media screen and (prefers-color-scheme: dark) {
+              :root {
+                --text-color: white;
+                --border-color: rgb(43, 43, 43);
+                --background-color: rgba(255,255,255,0.05);
+              }
+            }
+            
+            body {
+                position: relative;
+                color: var(--text-color);
+                font: -apple-system-body;
+                font-size: 26pt;
+                line-height: 33pt;
+                word-spacing: 3pt;
+            }
+            
+            h1 {
+                text-align: center;
+                font: -apple-system-headline;
+                font-size: 32pt;
+                line-height: 32pt;
+                padding: 0;
+                margin: 0 0 32px 0;
+            }
+            
+            p {
+                text-indent: 64px;
+                padding: 0;
+                margin: 0;
+            }
+            
+            box {
+                display: inline-block;
+                position: relative;
+                border: 2px solid var(--border-color);
+                background-color: var(--background-color);
+                padding: 30px;
+                width: calc(100% - 32px * 2);
+                font-size: 18pt;
+                line-height: 28pt;
+            }
+        
+            section {
+                margin: 32px;
+                padding: 32px;
+                border: 2px var(--border-color) solid;
+            }
+            
+        </style>
+    </head>
+    <body>
+        <section>
+            TiltType supports custom layouts via side-loaded plist or json files.  Note, however, that only a single custom layout is supported at this time.  You can add more than one, but only the first will take effect, chosen alphabetically by file name.
+        </section>
+        <section>
+            <h1>Why</h1>
+            
+            There are countless potential layouts and character combinations and this seemed like the simplest way to allow for that.  (Though, some assembly is required)
+        </section>
+        <section>
+            <h1>How</h1>
+            1 - Connect your device to your computer and navigate into it.  On macOS, this is done via the Finder.  Windows?  No idea.  😄<br>
+            <br>
+            2 - Once there, select the "Files" tab, and scroll down to the "TiltType" app entry.<br>
+            <br>
+            3 - Expand it, and you should see two layout template files.  (One plist, and one json)<br>
+            <br>
+            4 - Copy the file in the format of your choosing to your hdd, rename it, and modify it as you like using the schema outlined below for reference.<br>
+            <br>
+            5 - Copy the file back (remember to rename it first) into the same location you got it from by dragging and dropping it in.<br>
+            <br>
+            6 - In TiltType Settings, Select "Layout" and switch it to "Custom (Sideloaded)"<br>
+            <br>
+            The next time you see the TiltType keyboard, your layout should be loaded!<br>
+        </section>
+        <section>
+            <h1>JSON/Plist Schema</h1>
+            
+            Here I will list out the contents of a custom layout, what is required, what is optional, and what potential values any given thing may have.  It's probably best to open one of the layout template files, using it as reference as you follow along.<br>
+            <br>
+            1. The root object is a dictionary with two sub-dictionary values, keyed as:<br>
+            <br>
+            <box>
+                "Buttons"<br>
+                "Keys"
+            </box>
+            <br>
+            <br>
+            The "Buttons" dictionary (I'll label these with 🟢) will contain all values necessary to specify the surrounding 3 buttons for each keyboard in any given state.  The "Keys" dictionary (I'll label these with 🅰️) will contain all values necessary to specify the keys within each ring of each joystick for any given state.<br>
+            <br>
+            🟢 1a. The "Buttons" dictionary then contains one sub-dictionary per keyboard state, keyed as:<br>
+            <br>
+            <box>
+                "State - Normal"<br>
+                "State - Shift"<br>
+                "State - Alt"<br>
+                "State - Shift Alt"
+            </box>
+            <br>
+            <br>
+            ("Normal" is the default state of the keyboard.  "Shift" is when the shift modifier has been toggled on.  "Alt" is when the alt modifier has been toggled on.  "Shift Alt" is when both have been toggled on.  The only required entry here is the "Normal" state.  Any other state not provided will simply adopt from that.)<br>
+            <br>
+            🟢 1b. Each of those contain one dictionary per side, keyed as:<br>
+            <br>
+            <box>
+                "Layout - Left"<br>
+                "Layout - Right"
+            </box>
+            <br>
+            <br>
+            🟢 1c. Each of those then contain one dictionary per button position, keyed as:<br>
+            <br>
+            <box>
+                "Trailing Bottom"<br>
+                "Leading Bottom"<br>
+                "Leading Top"
+            </box>
+            <br>
+            <br>
+            (Note: Leading refers to a position on the outer-most edge of a joystick, where trailing refers to the inner-most edge.)<br>
+            <br>
+            🟢 1d. Each of those then contain some number of the following key pairs:<br>
+            <br>
+            <box>
+            1. "type":  Optional.  A string that specifies the appearance of a button.  See "Button Types" below for a list of possible values.  Defaults to "Click".<br>
+            <br>
+            2. "action":  Optional.  A string specifying an action to be performed upon button press.  See "Keyboard Actions" below for a list of possible values.  Defaults to "Type".<br>
+            <br>
+            3. "doubleAction": Optional.  A string specifying an action to be performed upon double-tap.  See "Keyboard Actions" below for a list of possible values.  Defaults to nil.<br>
+            <br>
+            4. "inputs":  Optional.  An array of strings specifying any inputs to be used in the specified action or doubleAction.  For example, with an action of "ToggleModifiers", this might contain one or more "Keyboard Modifier" (see below for a list of possible values), or with an action of "Type", it might contain one or more strings, containing one or more characters, in which to type.  Defaults to an empty array.<br>
+            <br>
+            5. "label":  Optional.  A string that will appear on the button.  Defaults to the first object in "inputs", or an empty string.<br>
+            <br>
+            6. "preview":  Optional.  A string that will appear when the button is pressed but not yet released.  Defaults to the value of "label".  Note: This behavior, for buttons, is currently disabled.<br>
+            <br>
+            7. "shouldHide":  Optional.  A boolean value specifying whether or not a button's label should hide if the Visibility setting for "Letters" (in normal or shift mode) or "Numbers" (in alt or shift alt mode) are set to false in TiltType's settings.  Defaults to true.<br>
+            <br>
+            8. "shouldFlip":  Optional.  A boolean value specifying whether or not a bottom button's label should flip upside-down if "Allow Upside-Down Characters" is set to true in TiltType's settings.  Defaults to false.
+            </box>
+            <br>
+            <br>
+            🅰️ 2a. The "Keys" dictionary then contains one sub-dictionary per keyboard state, keyed as:<br>
+            <br>
+            <box>
+                "State - Normal"<br>
+                "State - Shift"<br>
+                "State - Alt"<br>
+                "State - Shift Alt"
+            </box>
+            <br>
+            <br>
+            ("Normal" is the default state of the keyboard.  "Shift" is when the shift modifier has been toggled on.  "Alt" is when the alt modifier has been toggled on.  "Shift Alt" is when both have been toggled on.  The only required entry here is the "Normal" state.  Any other state not provided will simply adopt from that.)<br>
+            <br>
+            🅰️ 2a. Each of those contain one array per side, keyed as:<br>
+            <br>
+            <box>
+                "Layout - Left"<br>
+                "Layout - Right"
+            </box>
+            <br>
+            <br>
+            🅰️ 2b. Each of those then contains one array per ring, starting with the outer-most ring in the first array, and moving inward for each subsequent entry.  Note that although TiltType can handle any number of rings, it really only supports exactly 2.<br>
+            <br>
+            🅰️ 2c. Each of those arrays then contain one dictionary for each key (8 per ring), containing some number of the following key pairs:<br>
+            <br>
+            <box>
+            1. "action":  Optional.  A string specifying an action to be performed upon button press.  See "Keyboard Actions" below for a list of possible values.  Defaults to "Type".<br>
+            <br>
+            2. "inputs":  Optional.  An array of strings specifying any inputs to be used in the specified action or doubleAction.  For example, with an action of "ToggleModifiers", this might contain one or more "Keyboard Modifier" (see below for a list of possible values), or with an action of "Type", it might contain one or more strings, containing one or more characters, in which to type.  Defaults to an empty array.<br>
+            <br>
+            3. "label":  Optional.  A string that will appear on the button.  Defaults to the first object in "inputs", or an empty string.<br>
+            <br>
+            4. "preview":  Optional.  A string that will appear when the button is pressed but not yet released.  Defaults to the value of "label".  Note: This behavior, for buttons, is currently disabled.<br>
+            <br>
+            5. "shouldHide":  Optional.  A boolean value specifying whether or not a button's label should hide if the Visibility setting for "Letters" (in normal or shift mode) or "Numbers" (in alt or shift alt mode) are set to false in TiltType's settings.  Defaults to true.<br>
+            <br>
+            6. "shouldFlip":  Optional.  A boolean value specifying whether or not a bottom button's label should flip upside-down if "Allow Upside-Down Characters" is set to true in TiltType's settings.  Defaults to false.
+            <br>
+            7. "shouldRotate":  Optional.  A boolean value specifying whether or not a bottom button's label should be allowed to rate at all.  Defaults to true.
+            </box>
+        </section>
+        <section>
+            <h1>String Values</h1>
+                
+                Keyboard States:<br>
+                <br>
+                <box>
+                    "State - Normal"<br>
+                    "State - Shift"<br>
+                    "State - Alt"<br>
+                    "State - Shift Alt"
+                </box>
+                <br>
+                <br>
+                Layout Positions:<br>
+                <br>
+                <box>
+                    "Layout - Left"<br>
+                    "Layout - Right"
+                </box>
+                <br>
+                <br>
+                Button Positions:<br>
+                <br>
+                <box>
+                    "Trailing Bottom"<br>
+                    "Leading Bottom"<br>
+                    "Leading Top"
+                </box>
+                <br>
+                <br>
+                Keyboard Modifiers:<br>
+                <br>
+                <box>
+                    "Shift"<br>
+                    "Alt"
+                </box>
+                <br>
+                <br>
+                Button Types:<br>
+                <br>
+                <box>
+                    "Push"<br>
+                    "Click"
+                </box>
+                <br>
+                <br>
+                Keyboard Actions:<br>
+                <br>
+                <box>
+                    "Type"<br>
+                    "Redo"<br>
+                    "Delete"<br>
+                    "ApplyModifiers"<br>
+                    "ClearModifiers"<br>
+                    "SetOn"<br>
+                    "SetOff"<br>
+                    "ToggleModifiers"<br>
+                    "ToggleModifersOff"<br>
+                    "DismissKeyboard"<br>
+                    "NextKeyboard"
+                </box>
+            <br>
+        </section>
+    </body>
+</html>

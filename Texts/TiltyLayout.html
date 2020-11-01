@@ -1,0 +1,161 @@
+
+<html>
+    <head>
+        <meta name="viewport" content="width=device-width, shrink-to-fit=YES">
+        <style>
+
+            :root {
+              --text-color: black;
+              --border-color: rgb(203, 204, 208);
+              --background-color: rgba(0,0,0,0.05);
+            }
+        
+            @media screen and (prefers-color-scheme: dark) {
+              :root {
+                --text-color: white;
+                --border-color: rgb(43, 43, 43);
+                --background-color: rgba(255,255,255,0.05);
+              }
+            }
+            
+            body {
+                position: relative;
+                color: var(--text-color);
+                font: -apple-system-body;
+                font-size: 26pt;
+                line-height: 33pt;
+                word-spacing: 3pt;
+            }
+            
+            h1 {
+                text-align: center;
+                font: -apple-system-headline;
+                font-size: 32pt;
+                line-height: 32pt;
+                padding: 0;
+                margin: 0 0 32px 0;
+            }
+            
+            p {
+                text-indent: 64px;
+                padding: 0;
+                margin: 0;
+            }
+        
+            box {
+                display: inline-block;
+                position: relative;
+                border: 2px solid var(--border-color);
+                background-color: var(--background-color);
+                padding: 30px;
+                width: calc(100% - 32px * 2);
+                font-size: 18pt;
+                line-height: 28pt;
+            }
+        
+            section {
+                margin: 32px;
+                padding: 32px;
+                border: 2px var(--border-color) solid;
+            }
+            
+        </style>
+    </head>
+    <body>
+        <section>
+            <p>
+                Tilty is an unfinalized English keyboard layout which aims to lessen a users' dependence on developed muscle memory as is typically needed for effective keyboard use.<br>
+                <br>
+                It attempts to accomplish this by dividing the english alphabet into two spacially-separated symmetrical groups, each of which are then subdivided into two smaller separate groups.  Characters are then classified, alphabetically, into one of these four sub-groups based on the physical attributes of their capitalized appearances.  The classifiers are determined and applied as follows:
+            </p>
+            <br>
+            <box>
+                1 - Characters that contain 1+ closed loop<br>
+                2 - Characters that touch the baseline one time<br>
+                3 - Characters that touch the baseline two times<br>
+                4 - Characters that contain no loops
+            </box>
+            <br>
+            <br>
+                Resulting in:
+            <br>
+            <br>
+            <box>
+                Group1 = B D O P Q R<br>
+                Group2 = F I J T V Y<br>
+                Group3 = A H K M N W X<br>
+                Group4 = C E G L S U Z
+            </box>
+            <br>
+            <br>
+            <box>
+                <i>Note: There are some discrepencies between font styles, so to clarify, the following assumptions are being made:<br>
+                    <br>
+                1. The letter "M" only touches the baseline two times.<br>
+                2. The angled enclosure within the letter "A" does not count as a "loop", as it is not in any way curved.<br>
+                3. The letter "J" only touches the baseline at a single point, rather than a curved bottom.</i>
+            </box>
+            <br>
+            <br>
+            These groups can be laid out in a variety of ways (hardware keyboards included!), but in TiltType they are assigned to 1 of 2 rings (inner and outer) on 1 of 2 keypads (left and right), like so:
+            <br>
+            <br>
+            <box>
+                LayoutL = Group2 Group3   <- Left Layout<br>
+                LayoutR = Group1 Group4   <- Right Layout
+            </box>
+            <br>
+            <br>
+            Each group is laid out inner ring first.  Each ring contains 8 keys, and are laid out starting at their outer extent, rotating up and around in 45 degree increments (left joystick clockwise / right joystick counter-clockwise).  This leaves the inner rings at 6/8 and the outer rings at 7/8 capacity.  The key groups defined above are offset by one position.  The remaining keys of the outer rings are used to toggle Symbol mode (labeled: "123" / "ABC"), and the remaining keys of the inner rings offer common puntuation choices.
+        </section>
+        <section>
+            <h1>Why / How</h1>
+            <p>
+                Since TiltType's appearance is entirely unconventional, key layouts needed to be remapped anyway.  I first tried adapting Qwerty, of course, just to see how it performed.  Since Qwerty is seemingly arbitrarilty laid out, what that effectively meant was that you'd now need to learn and think about two layouts (Standard Qwerty & Ring Qwerty) in order to effectively use just the one.  So I figured I might as well see if there was a way to logically lay everything out, and immediately went to work on it, more so out of curiosity than anything else.<br>
+                <br>
+                Dividing the keyboard up actually turned out to be fairly straight forward.  I knew I had 32 keys to work with, which were more than enough.  I knew I needed 8 keys per ring, and I knew I wanted the sets of rings to be symmetrical (the same number of characters in each mirrored ring) if at all possible.  There are 26 characters in the english language, and while that doesn't divide perfectly by 4, it does allow for a 2 possible combinations (or their reverse):  8/5 and 7/6.<br>
+                <br>
+                From there it was mostly matter of pattern recognition and classification.<br>
+                <br>
+                Letters with closed loops were the first that stuck out, and it provided 6 characters (7 if you include A), which was a perfect start.  Baseline touching was next, but I also tried various other feature classifiers, such as stroke count, horizontal vs vertical strokes, curves vs no curves, and more.<br>
+                <br>
+                In the end, I had settled on a layout that worked, I think, quite well.  Without ever needing to look at the keyboard, knowing the key you intend to type, you can almost perfectly imagine where it might be.  If the letter is "A", you know it touches the baseline 2 times, so you know it is on the left joystick, on the outer ring.  Since the letters are alphabetical, starting at 45 degrees outward, and rotating inward, you would know immediately that the key is in the upper left.  If the letter is D, you know it has a closed loop, so it is in the inner right ring, right after B, so it is positioned at the top.  And so on, and so forth.  It's <i>really</i> quite cool!  :)
+            </p>
+        </section>
+        <section>
+            <h1>Internationalization</h1>
+            <p>
+                Honestly, the fact that this worked out as well as it has for the English Alphabet at all was pretty lucky all on it's own, so I don't expect it would work out quite so well for any others.  (But then again, I haven't looked into it at all)  Because of that, I have had no plans for international language alternatives, either for the Tilty layout itself, or for TiltType in general.  The app does support custom layouts, however, so please feel encouraged to experiment, and if you think you've come up with something great, please feel encouraged to reach out!
+            </p>
+        </section>
+        <section>
+            <h1>Further Discussion</h1>
+            <p>
+                I'm generally happy with how it all worked out, but it still bugs me slighly that it didn't work out <i>absolutely</i> perfectly.  The last group is basically a catch-all for anything remaining (it would be best if there were a fourth distinct classification), and J and I in most fonts don't actually touch the baseline at a single point, as we are assuming.  But, I've rethought the classifiers several times now (shower thoughts, etc), and while I have four contending layouts, this one still ranks first by a good margin.<br>
+                <br>
+                If we were open to actually revising our written alphabet (extremely unlikely), it wouldn't take much to get this working near-perfectly, however.  I haven't given it too much thought, so there are likely better solutions, but as one off-hand example:  An "E" drawn more like a "C",  "L" drawn like a backward "J", and "Z" drawn like a backward "7" could give us:
+            </p>
+            <br>
+            <box>
+                1 - Characters that contain 1+ closed loop<br>
+                2 - Characters that contain 1+ curved line<br>
+                3 - Characters that touch the baseline one time<br>
+                4 - Characters that touch the baseline two times
+            </box>
+            <br>
+            <br>
+                Resulting in:
+            <br>
+            <br>
+            <box>
+                Group1 = B D O P Q R<br>
+                Group2 = C E G J L S U<br>
+                Group3 = F I T V Y Z<br>
+                Group4 = A H K M N W X
+            </box>
+            <br>
+            <br>
+                Worth it?  I don't know.  But it's certainly nice to imagine.
+        </section>
+    </body>
+</html>
